@@ -1,0 +1,17 @@
+.Login-label {
+  text-align: center;
+}
+
+.login-button {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.login-button:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
