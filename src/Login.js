@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [validated, setValidated] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -18,7 +21,7 @@ function Login() {
 
   const handleRemember = (event) => {
     setRemember(event.target.checked);
-  };  
+  };
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -28,8 +31,8 @@ function Login() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-    }else{
-        doLogin();
+    } else {
+      doLogin();
     }
 
     setValidated(true);
@@ -44,19 +47,21 @@ function Login() {
       },
       body: JSON.stringify({
         username: username,
-        password: password
-      })
+        password: password,
+      }),
     });
 
     const data = await response.json();
     console.log(data);
 
-    if(data.result){
-        alert("hehe correct")
-    }else{
-        alert("hehe wrong")
+    if (data.result) {
+      navigate('/home');
+    } else {
+      alert("hehe wrong");
     }
   };
+
+  
 
   return (
     <>
@@ -107,19 +112,24 @@ function Login() {
                   please enter password
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="Remember me"
-                  checked={remember}
-                  onChange={handleRemember}
-                />
-              </Form.Group>
-              <Button
-                variant="primary"
-                type="submit"
-                className="login-button"
-              >
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="formCheckbox">
+                    <Form.Check
+                      type="checkbox"
+                      label="Remember me"
+                      checked={remember}
+                      onChange={handleRemember}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                <div className="d-flex justify-content-end">
+                    <a href="forget.html">Forget password?</a>
+                </div>
+                </Col>
+              </Row>
+              <Button variant="primary" type="submit" className="login-button">
                 Login
               </Button>
             </Form>
@@ -143,8 +153,12 @@ function Login() {
         </Row>
       </Container>
 
-      <p className="d-flex justify-content-center flex-row">Username is {username}</p>
-      <p className="d-flex justify-content-center flex-row">Password is {password}</p>
+      <p className="d-flex justify-content-center flex-row">
+        Username is {username}
+      </p>
+      <p className="d-flex justify-content-center flex-row">
+        Password is {password}
+      </p>
     </>
   );
 }
