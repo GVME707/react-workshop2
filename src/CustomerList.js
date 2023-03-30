@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import CustomerListItem from "./CustomerListItem";
 
 function CustomerList() {
   const [customerStore, setCustomerStore] = useState([]);
@@ -21,24 +22,39 @@ function CustomerList() {
     getData();
   }, []);
 
+const onDelete = async (d) => {
+    const response = await fetch("http://localhost:8080/api/customer/delete",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        customer_id: d.customer_id
+      })
+    }
+    );
+      const result = await response.json();
+
+      setCustomerStore(result.data);
+
+  };
   return (
     <>
-      <Container>
+      <Container >
         <Row>
           <Col sm={2}>ID</Col>
-          <Col md={8}>Name</Col>
+          <Col md={6}>Name</Col>
           <Col sm={2}>Gender</Col>
+          <Col sm={2}>Delete</Col>
         </Row>
         {customerStore.map((item) => (
-          <Row key={item.customer_id}>
-            <Col sm={2}>{item.customer_id}</Col>
-            <Col md={8}>
-              {item.title}
-              {item.first_name}
-              {item.last_name}
-            </Col>
-            <Col sm={2}>{item.gender}</Col>
-          </Row>
+          <CustomerListItem 
+          key={item.customer_id} 
+          data={item} 
+          onDelete={onDelete}
+          />
         ))}
       </Container>
     </>
