@@ -55,13 +55,11 @@ function Login() {
     console.log(data);
 
     if (data.result) {
-      navigate('/home');
+      navigate("/home");
     } else {
       alert("hehe wrong");
     }
   };
-
-  
 
   return (
     <>
@@ -124,14 +122,16 @@ function Login() {
                   </Form.Group>
                 </Col>
                 <Col>
-                <div className="d-flex justify-content-end">
+                  <div className="d-flex justify-content-end">
                     <a href="forget.html">Forget password?</a>
-                </div>
+                  </div>
                 </Col>
               </Row>
-              <Button variant="primary" type="submit" className="login-button">
-                Login
-              </Button>
+              <div className="d-grid gap-2">
+                <Button variant="primary" size="lg" type="submit">
+                  Login
+                </Button>
+              </div>
             </Form>
           </Col>
           <Col></Col>

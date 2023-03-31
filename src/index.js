@@ -12,6 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 import Login from "./Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Home";
+import CustomerForm from "./CustomerForm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +21,7 @@ root.render(
       <Route path="/" element={<App/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
+      <Route path="/customer/:customerId" element={<CustomerForm/>}></Route>
     </Routes>
   </BrowserRouter>
 );
