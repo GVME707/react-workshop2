@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 const User = require("./libs/User");
 const Customer = require("./libs/Customer");
@@ -11,6 +12,8 @@ const port = 8080;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(express.static(path.resolve(__dirname, 'build')));
 
 app.post("/api/login", (req, res) => {
 
@@ -74,6 +77,10 @@ app.post("/api/customer/delete", (req, res) => {
         result: true,
         data: data
     });
+});
+
+app.get("/*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 app.listen(port, () => {
