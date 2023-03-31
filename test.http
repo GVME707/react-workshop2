@@ -1,0 +1,43 @@
+POST http://localhost:8080/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "test1",
+    "password": "1111"
+}
+
+###
+GET http://localhost:8080/api/customer HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:8080/api/customer/add HTTP/1.1
+content-type: application/json
+
+{
+    "customer_id": 4,
+    "title": "Mr.",
+    "first_name": "Ken",
+    "last_name": "Tripper",
+    "gender": "M"
+}
+
+###
+POST http://localhost:8080/api/customer/update HTTP/1.1
+content-type: application/json
+
+{
+    "customer_id": 4,
+    "title": "Mrs.",
+    "first_name": "Kenna",
+    "last_name": "Trippers",
+    "gender": "F"
+}
+
+###
+POST http://localhost:8080/api/customer/delete HTTP/1.1
+content-type: application/json
+
+{
+    "customer_id": 4
+}
